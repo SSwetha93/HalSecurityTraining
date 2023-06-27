@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HalSecurityTrainingWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230619214424_AddStudenttoDatabase")]
-    partial class AddStudenttoDatabase
+    [Migration("20230627044517_AddEmployeeTable")]
+    partial class AddEmployeeTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,13 +24,11 @@ namespace HalSecurityTrainingWeb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HalSecurityTrainingWeb.Models.Student", b =>
+            modelBuilder.Entity("HalSecurityTrainingWeb.Models.Employee", b =>
                 {
-                    b.Property<int>("StudentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"), 1L, 1);
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(2);
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
@@ -43,6 +41,13 @@ namespace HalSecurityTrainingWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -50,9 +55,9 @@ namespace HalSecurityTrainingWeb.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("StudentId");
+                    b.HasKey("EmployeeId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Employees");
                 });
 #pragma warning restore 612, 618
         }
